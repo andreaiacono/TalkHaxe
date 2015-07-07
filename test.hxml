@@ -1,0 +1,15 @@
+-cp src
+-main haxe.Test
+-java builds/tests/java
+--next
+-cp src
+-main haxe.Test
+-js builds/tests/javascript/test.js
+--next
+-cp src
+-main haxe.Test
+-neko builds/tests/neko/test.n
+--next
+-cp src
+-main haxe.Test
+-cpp builds/tests/cpp

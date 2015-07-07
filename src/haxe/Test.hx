@@ -3,7 +3,6 @@ package haxe;
 class Test {
 
     static public function main() {
-
         var test = new Test('{ "name" : "test", [ {"name": "child1"}, { "name":"child2"}]};');
     }
 
