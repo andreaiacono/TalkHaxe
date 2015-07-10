@@ -3,9 +3,11 @@
 -java builds/exports/java
 -dce full
 -D analyzer
+-lib thx.core
 --next
 -cp haxe/src
 -main haxe.HaxeTree
 -js builds/exports/javascript/tree.js
+-lib thx.core
 -dce full
 -D analyzer
