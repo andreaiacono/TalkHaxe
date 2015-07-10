@@ -2,6 +2,8 @@ package haxe;
 
 class HaxeTree {
 
+    public static function main() {}
+
     var root:Node;
 
     public function new(jsonData:String) {

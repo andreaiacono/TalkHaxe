@@ -1,9 +1,11 @@
--cp src
--main haxe.Main
+-cp haxe/src
+-main haxe.HaxeTree
 -java builds/exports/java
+-dce full
+-D analyzer
 --next
--cp src
--main haxe.Main
+-cp haxe/src
+-main haxe.HaxeTree
 -js builds/exports/javascript/tree.js
 -dce full
 -D analyzer
