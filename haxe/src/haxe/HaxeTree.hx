@@ -11,18 +11,18 @@ class HaxeTree {
         root = haxe.Json.parse(jsonData);
     }
 
-    function findNode(name:String):Node {
-        return find(root, name);
+    function findNode(value:Int):Node {
+        return find(root, value);
     }
 
-    function find(node:Node, name:String):Node {
-        if (node.name == name) {
+    function find(node:Node, value:Int):Node {
+        if (node.value == value) {
             return node;
         }
 
         if (node.children != null) {
             for (child in node.children) {
-                var result = find(child, name);
+                var result = find(child, value);
                 if (result != null)
                     return result;
             }
@@ -32,10 +32,10 @@ class HaxeTree {
     }
 
     function getBestValue():Int {
-        return internalGetBestValue(root, 0, 0);
+        return findBestValue(root, 0, 0);
     }
 
-    private function internalGetBestValue(node:Node, level:Int, bestValue:Int):Int {
+    private function findBestValue(node:Node, level:Int, bestValue:Int):Int {
 
         if (bestValue < node.value) {
             bestValue = node.value;
@@ -43,7 +43,7 @@ class HaxeTree {
 
         if (node.children != null) {
             for (child in node.children) {
-                var value = internalGetBestValue(child, ++level, bestValue);
+                var value = findBestValue(child, ++level, bestValue);
                 if (value > bestValue) {
                     bestValue = value;
                 }
