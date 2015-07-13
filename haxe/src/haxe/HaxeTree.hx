@@ -1,6 +1,9 @@
 package haxe;
 
+@:expose
 class HaxeTree {
+
+    public static function main() {}
 
     var root:Node;
 

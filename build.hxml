@@ -1,9 +1,13 @@
--cp src
--main haxe.Main
+-cp haxe/src
+-main haxe.HaxeTree
 -java builds/exports/java
+-dce full
+-D analyzer
+-lib thx.core
 --next
--cp src
--main haxe.Main
+-cp haxe/src
+-main haxe.HaxeTree
 -js builds/exports/javascript/tree.js
+-lib thx.core
 -dce full
 -D analyzer
