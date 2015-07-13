@@ -225,9 +225,9 @@ function tree() {
 
         nodeUpdate.select("circle")
                 .attr("r", radius)
-//                .style("fill", function (d) {
-//                    return d._children ? "lightsteelblue" : "#fff";
-//                });
+                .style("fill", function (d) {
+                    return d._children ? "lightsteelblue" : "#fff";
+                });
 
         nodeUpdate.select("text")
                 .style("fill-opacity", 1);
@@ -284,29 +284,33 @@ function tree() {
     }
 
     // Toggle children on click.
-    function click(d) {
-        if (d.children) {
-            d._children = d.children;
-            d.children = null;
-        } else {
-            d.children = d._children;
-            d._children = null;
+    function click(node) {
+        if (node.children) {
+            node._children = node.children;
+            node.children = null;
         }
-        update(d);
+        else {
+            node.children = node._children;
+            node._children = null;
+        }
+        update(node);
     }
 
-    function add_node(d) {
-        this.on("click", function(d) {
-            var a = {"name": "TEST"},
-                p = nodes[0];
-            if(d.children)
+    function add_node(parent) {
+        this.on("click", function(parent) {
+            var child = {"name": "TEST"};
+            console.log("parent=" + parent)
+
+            if(parent.children)
             {
-                d.children.push(a);
+                console.log("push");
+                parent.children.push(child);
             }
             else {
-                d.children = [a];
+                console.log("array");
+                parent.children = [child];
             }
-            update();
+            update(parent);
         });
     }
 
