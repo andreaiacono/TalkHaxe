@@ -74,8 +74,10 @@ var treeData = [
 
 function computeBestValue() {
     res = document.getElementById("result");
-    haxe.haxeTree("{ value: 13}")
-//    res.innerHTML = haxeTree.getBestValue();
+    jsonTree = toString(treeData[0]);
+    console.log(jsonTree)
+    h = new haxe.HaxeTree(jsonTree)
+    res.innerHTML = h.getBestValue();
 }
 
 function tree() {
@@ -344,5 +346,17 @@ function tree() {
         //        update();
         //    });
     }
+}
 
+function toString(obj) {
+    var seen = [];
+    return JSON.stringify(obj, function(key, val) {
+       if (val != null && typeof val == "object") {
+            if (seen.indexOf(val) >= 0) {
+                return;
+            }
+            seen.push(val);
+        }
+        return val;
+    });
 }

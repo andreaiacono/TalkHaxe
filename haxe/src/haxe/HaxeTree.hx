@@ -1,6 +1,7 @@
 package haxe;
 
 @:expose
+@:keep
 class HaxeTree {
 
     public static function main() {}
@@ -11,7 +12,7 @@ class HaxeTree {
         root = haxe.Json.parse(jsonData);
     }
 
-    function findNode(value:Int):Node {
+    public function findNode(value:Int):Node {
         return find(root, value);
     }
 
@@ -31,7 +32,7 @@ class HaxeTree {
         return null;
     }
 
-    function getBestValue():Int {
+    public function getBestValue():Int {
         return findBestValue(root, 0, 0);
     }
 
