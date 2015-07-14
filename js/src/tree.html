@@ -6,6 +6,16 @@
 </head>
 <body onload="javascript:tree()">
 
+<div id="overlay">
+    <div>
+        <p><label>Node value:<br>
+            <input type="text" autofocus required size="2" name="name" value=""></label></p>
+        <p><input type="submit" name="feedbackForm" value="Set value"></p>
+        <a href="javascript:close()">Close</a>
+    </div>
+</div>
+
+
 <div id="best" class="btn" onClick="computeBestValue()">Best Value</div>
 <div id="result" class="result"></div>
 <div id="input_data" class="input_box">

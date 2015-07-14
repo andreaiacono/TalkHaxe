@@ -151,7 +151,7 @@ function tree() {
 
         // Normalize for fixed-depth.
         nodes.forEach(function (d) {
-            d.y = d.depth * 180;
+            d.y = d.depth * 80;
         });
 
         // Update the nodes…
@@ -183,8 +183,36 @@ function tree() {
             })
             .style("fill-opacity", 0.1);
 
+
+        // x sign
+        node.append("line")
+            .attr("stroke", "#F88")
+            .attr("stroke-width", "2")
+            .attr("x1", -radius * 1.2)
+            .attr("y1", -radius * 0.3)
+            .attr("x2", -radius * 1.8)
+            .attr("y2", radius * 0.3)
+
+        node.append("line")
+            .attr("stroke", "#F88")
+            .attr("stroke-width", "2")
+            .attr("x1", -radius * 1.2)
+            .attr("y1", radius * 0.3)
+            .attr("x2", -radius * 1.8)
+            .attr("y2", -radius * 0.3)
+
+
+        // trasparent circle to bind the click
+        node.append("circle")
+            .attr("r", radius *0.8)
+            .attr("cx", -radius*1.5)
+            .attr("cy", "0px")
+            .style("fill-opacity", 0)
+            .style("opacity", 0)
+            .call(remove_node);
+
         // plus sign
-        nodeEnter.append("line")
+        node.append("line")
             .attr("stroke", "#AAA")
             .attr("stroke-width", "2")
             .attr("x1", radius * 1.2)
@@ -192,40 +220,22 @@ function tree() {
             .attr("x2", radius * 1.8)
             .attr("y2", "0px")
 
-        nodeEnter.append("line")
+        node.append("line")
             .attr("stroke", "#AAA")
             .attr("stroke-width", "2")
             .attr("x1", radius * 1.5)
-            .attr("y1", "-4px")
+            .attr("y1", -radius * 0.3)
             .attr("x2", radius * 1.5)
-            .attr("y2", "4px")
+            .attr("y2", radius * 0.3)
 
         // trasparent circle to bind the click
-        nodeEnter.append("circle")
+        node.append("circle")
             .attr("r", radius)
-            .attr("cx", radius *1.5)
+            .attr("cx", radius * 1.5)
             .attr("cy", "0px")
             .style("fill-opacity", 0)
             .style("opacity", 0)
-            .call(add_node);
-
-        // minus sign
-        nodeEnter.append("line")
-            .attr("stroke", "#AAA")
-            .attr("stroke-width", "2")
-            .attr("x1", radius - radius*2.2)
-            .attr("y1", "0px")
-            .attr("x2", radius - radius*2.8)
-            .attr("y2", "0px")
-
-        // trasparent circle to bind the click
-        nodeEnter.append("circle")
-            .attr("r", radius)
-            .attr("cx", radius - 9)
-            .attr("cy", "0px")
-            .style("fill-opacity", 0)
-            .style("opacity", 0)
-            .call(remove_node);
+            //.call(add_node);
 
         // Transition nodes to their new position.
         var nodeUpdate = node.transition()
@@ -310,6 +320,10 @@ function tree() {
     }
 
     function add_node(parent) {
+
+        console.log("add node")
+        overlay();
+
         this.on("click", function (parent) {
             var child = {"value": 13};
             console.log("parent=" + parent)
@@ -329,8 +343,8 @@ function tree() {
 
     function remove_node(node) {
 
-        d3.selectAll('.parent').each(function(parentDatum) {
-            d3.select(this).selectAll('.child').each(function(childDatum) {
+        d3.selectAll('.parent').each(function (parentDatum) {
+            d3.select(this).selectAll('.child').each(function (childDatum) {
                 console.log("child:" + childDatum.value)
             });
         });
@@ -350,8 +364,8 @@ function tree() {
 
 function toString(obj) {
     var seen = [];
-    return JSON.stringify(obj, function(key, val) {
-       if (val != null && typeof val == "object") {
+    return JSON.stringify(obj, function (key, val) {
+        if (val != null && typeof val == "object") {
             if (seen.indexOf(val) >= 0) {
                 return;
             }
@@ -359,4 +373,13 @@ function toString(obj) {
         }
         return val;
     });
+}
+
+function overlay(){
+    el = document.getElementById("overlay");
+    el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+}
+
+function close() {
+    document.getElementById("overlay").style.visibility = 'hidden';
 }
