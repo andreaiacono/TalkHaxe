@@ -72,6 +72,12 @@ var treeData = [
     }
 ];
 
+function computeBestValue() {
+    res = document.getElementById("result");
+    haxe.haxeTree("{ value: 13}")
+//    res.innerHTML = haxeTree.getBestValue();
+}
+
 function tree() {
 
     var nodes;

@@ -2,10 +2,12 @@
     <link rel="stylesheet" type="text/css" href="css/tree.css">
     <script src="js/d3.min.js" charset="utf-8"></script>
     <script src="js/tree.js" charset="utf-8"></script>
+    <script src="../../builds/exports/javascript/tree.js" charset="utf-8"></script>
 </head>
 <body onload="javascript:tree()">
 
-<div id=""></div>
+<div id="best" class="btn" onClick="computeBestValue()">Best Value</div>
+<div id="result" class="result"></div>
 <div id="input_data" class="input_box">
     Name: <input name="name" value=""/>
     <br/>
