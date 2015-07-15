@@ -166,15 +166,17 @@ function tree() {
             .attr("transform", function (d) {
                 return "translate(" + source.x0 + "," + source.y0 + ")";
             })
+
+        var gec = nodeEnter.append("g")
             .on("click", click);
 
-        nodeEnter.append("circle")
+        gec.append("circle")
             .attr("r", 1e-6)
             .style("fill", function (d) {
                 return d._children ? "lightsteelblue" : "#fff";
             });
 
-        nodeEnter.append("text")
+        gec.append("text")
             .attr("text-anchor", "middle")
             .attr("dy", "4px")
             .attr("font-size", 0)
@@ -185,7 +187,10 @@ function tree() {
 
 
         // x sign
-        node.append("line")
+        var group_remove_node = node.append("g")
+            .on('click', remove_node);
+
+        group_remove_node.append("line")
             .attr("stroke", "#F88")
             .attr("stroke-width", "2")
             .attr("x1", -radius * 1.2)
@@ -193,7 +198,7 @@ function tree() {
             .attr("x2", -radius * 1.8)
             .attr("y2", radius * 0.3)
 
-        node.append("line")
+        group_remove_node.append("line")
             .attr("stroke", "#F88")
             .attr("stroke-width", "2")
             .attr("x1", -radius * 1.2)
@@ -201,18 +206,20 @@ function tree() {
             .attr("x2", -radius * 1.8)
             .attr("y2", -radius * 0.3)
 
-
         // trasparent circle to bind the click
-        node.append("circle")
+        group_remove_node.append("circle")
             .attr("r", radius *0.8)
             .attr("cx", -radius*1.5)
             .attr("cy", "0px")
             .style("fill-opacity", 0)
-            .style("opacity", 0)
-            .call(remove_node);
+            .style("opacity", 0);
+
 
         // plus sign
-        node.append("line")
+        var group_add_node = node.append("g")
+            .on('click', add_node);
+
+        group_add_node.append("line")
             .attr("stroke", "#AAA")
             .attr("stroke-width", "2")
             .attr("x1", radius * 1.2)
@@ -220,7 +227,7 @@ function tree() {
             .attr("x2", radius * 1.8)
             .attr("y2", "0px")
 
-        node.append("line")
+        group_add_node.append("line")
             .attr("stroke", "#AAA")
             .attr("stroke-width", "2")
             .attr("x1", radius * 1.5)
@@ -229,13 +236,13 @@ function tree() {
             .attr("y2", radius * 0.3)
 
         // trasparent circle to bind the click
-        node.append("circle")
+        group_add_node.append("circle")
             .attr("r", radius)
             .attr("cx", radius * 1.5)
             .attr("cy", "0px")
             .style("fill-opacity", 0)
             .style("opacity", 0)
-            //.call(add_node);
+
 
         // Transition nodes to their new position.
         var nodeUpdate = node.transition()
